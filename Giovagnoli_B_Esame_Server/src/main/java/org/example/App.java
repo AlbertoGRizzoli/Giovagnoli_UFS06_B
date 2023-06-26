@@ -17,9 +17,8 @@ public class App
 
         System.out.println("Server started");
 
-        // Tutto quello che c'è dopo questo URL lo gestisco io
         server.createContext("/", new MyHandler());
-        server.setExecutor(null); // creates a default executor
+        server.setExecutor(null);
         server.start();
     }
 }
