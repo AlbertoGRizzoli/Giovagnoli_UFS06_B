@@ -4,11 +4,6 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-
-/**
- * Hello world!
- *
- */
 public class App
 {
     public static void main( String[] args )
@@ -19,6 +14,8 @@ public class App
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Server started");
 
         // Tutto quello che c'è dopo questo URL lo gestisco io
         server.createContext("/", new MyHandler());

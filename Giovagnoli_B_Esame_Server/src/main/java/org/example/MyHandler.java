@@ -1,14 +1,10 @@
 package org.example;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.*;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MyHandler implements HttpHandler {
 
@@ -19,14 +15,20 @@ public class MyHandler implements HttpHandler {
         URI uri = exchange.getRequestURI();
         System.out.println(uri);
 
-        String response1 = GestoreAlberghi.getInstance().selettoreComandiGestore(uri.toString().replace("/",""));
+        String query = uri.getQuery();
+        String command = "";
+        if (query != null && query.startsWith("cmd=")) {
+            command = query.substring(4);
+        }
 
-        String s = read(is);
-        System.out.println(s);
+        String response =  GestoreAlberghi.getInstance().selettoreComandiGestore(command);
 
-        exchange.sendResponseHeaders(200, response1.length());
+        String requestBody = read(is);
+        System.out.println(requestBody);
+
+        exchange.sendResponseHeaders(200, response.length());
         OutputStream os = exchange.getResponseBody();
-        os.write(response1.getBytes());
+        os.write(response.getBytes());
         os.close();
     }
 

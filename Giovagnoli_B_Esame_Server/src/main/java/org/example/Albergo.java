@@ -3,14 +3,14 @@ package org.example;
 public class Albergo {
     private int id;
     private String nome;
-    private int price_suite;
-    private int suite_qty;
+    private int suite_price;
+    private boolean suite;
 
-    public Albergo(int id, String nome, int price_suite, int suite_qty) {
+    public Albergo(int id, String nome, int price_suite, boolean suite) {
         this.id = id;
         this.nome = nome;
-        this.price_suite = price_suite;
-        this.suite_qty = suite_qty;
+        this.suite_price = price_suite;
+        this.suite=suite;
     }
 
     public int getId() {
@@ -30,22 +30,21 @@ public class Albergo {
         else this.nome="nome default";
     }
 
-    public int getPrice_suite() {
-        return price_suite;
+    public int getSuite_price() {
+        return suite_price;
     }
 
-    public void setPrice_suite(int price_suite) {
-        if(price_suite>0) this.price_suite = price_suite;
-        else this.price_suite=1;
+    public void setSuite_price(int suite_price) {
+        if(suite_price>0) this.suite_price = suite_price;
+        else this.suite_price = 1;
     }
 
-    public int getSuite_qty() {
-        return suite_qty;
+
+    public boolean getSuite() {
+        return suite;
     }
 
-    public void setSuite_qty(int suite_qty) {
-        if(suite_qty>=0) this.suite_qty = suite_qty;
-        else this.suite_qty=0;
-
+    public void setSuite(boolean suite) {
+        this.suite = suite;
     }
 }

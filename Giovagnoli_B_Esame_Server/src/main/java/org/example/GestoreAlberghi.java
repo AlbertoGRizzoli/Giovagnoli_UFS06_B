@@ -4,6 +4,7 @@ package org.example;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GestoreAlberghi {
@@ -13,29 +14,71 @@ public class GestoreAlberghi {
     private static final Gson gson = new Gson();
 
     public GestoreAlberghi() {
-        hotelList.add(new Albergo(1,"Hot place",200, 6));
-        hotelList.add(new Albergo(2,"Sogni d'oro",150, 0));
-        hotelList.add(new Albergo(3,"Bel riposone",100, 2));
+        hotelList.add(new Albergo(1,"Hot place",200, false));
+        hotelList.add(new Albergo(2,"Ronf Ronf posticino",150, true));
+        hotelList.add(new Albergo(3,"Bel riposone",100, true));
     }
 
     public static GestoreAlberghi getInstance() {
         if (instance == null) {
             instance = new GestoreAlberghi();
         }
-
         return instance;
     }
 
     public String all(){
-        return "";
+        String risposta="{ hotels: [";
+        for (int i=0; i<hotelList.size();i++) {
+            risposta += "id: " +hotelList.get(i).getId() + ", ";
+            risposta += "Nome: " +hotelList.get(i).getNome() + ", ";
+            risposta += "Prezzo_suite: " +hotelList.get(i).getSuite_price() + ", ";
+            risposta += "Quantita_suite: " +hotelList.get(i).getSuite() + "; ";
+        }
+        risposta+="]}";
+        risposta=gson.toJson(risposta);
+
+        return risposta;
     }
 
     public String allSorted(){
-        return "";
+        List<Albergo> newHotelList = new ArrayList<>(hotelList);
+        newHotelList.sort((h1, h2) -> {
+            return h1.getNome().compareTo(h2.getNome());
+        });
+
+        String risposta="{ hotels: [";
+        for (int i=0; i<newHotelList.size();i++) {
+            risposta += "id: " +newHotelList.get(i).getId() + ", ";
+            risposta += "Nome: " +newHotelList.get(i).getNome() + ", ";
+            risposta += "Prezzo_suite: " +newHotelList.get(i).getSuite_price() + ", ";
+            risposta += "Quantita_suite: " +newHotelList.get(i).getSuite() + "; ";
+        }
+        risposta+="]}";
+        risposta=gson.toJson(risposta);
+
+        return risposta;
     }
 
     public String moreExpensiveSuite(){
-        return "";
+
+        int maxPrice=0;
+        int index=0;
+        for(int i=0;i<hotelList.size();i++){
+            if(hotelList.get(i).getSuite()==true && hotelList.get(i).getSuite_price()>maxPrice){
+                maxPrice=hotelList.get(i).getSuite_price();
+                index=i;
+            }
+        }
+
+        String risposta="{ hotels: [";
+        risposta += "id: " +hotelList.get(index).getId() + ", ";
+        risposta += "Nome: " +hotelList.get(index).getNome() + ", ";
+        risposta += "Prezzo_suite: " +hotelList.get(index).getSuite_price() + ", ";
+        risposta += "Quantita_suite: " +hotelList.get(index).getSuite() + "; ";
+        risposta+="]}";
+        risposta=gson.toJson(risposta);
+
+        return risposta;
     }
 
 
