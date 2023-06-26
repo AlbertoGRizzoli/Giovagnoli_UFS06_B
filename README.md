@@ -1,6 +1,8 @@
 # Giovagnoli_UFS06_B
 Giovagnoli esame UFS06 sezione SAS B
 
+indirizzo ip: 172.16.150.144
+
 Il codice possiede 6 comandi:
 "all": stampa un JSON della lista non ordinata;
 "all_sorted": stampa un JSON della lista ordinata per ordine alfabetico;
