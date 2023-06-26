@@ -42,9 +42,7 @@ public class GestoreAlberghi {
 
     public String allSorted(){
         List<Albergo> newHotelList = new ArrayList<>(hotelList);
-        newHotelList.sort((h1, h2) -> {
-            return h1.getNome().compareTo(h2.getNome());
-        });
+        newHotelList.sort(Comparator.comparing(Albergo::getNome));
 
         String risposta="{ hotels: [";
         for (int i=0; i<newHotelList.size();i++) {
