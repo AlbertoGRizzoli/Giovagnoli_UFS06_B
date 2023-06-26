@@ -27,34 +27,13 @@ public class GestoreAlberghi {
     }
 
     public String all(){
-        String risposta="{ hotels: [";
-        for (int i=0; i<hotelList.size();i++) {
-            risposta += "id: " +hotelList.get(i).getId() + ", ";
-            risposta += "Nome: " +hotelList.get(i).getNome() + ", ";
-            risposta += "Prezzo_suite: " +hotelList.get(i).getSuite_price() + ", ";
-            risposta += "Quantita_suite: " +hotelList.get(i).getSuite() + "; ";
-        }
-        risposta+="]}";
-        risposta=gson.toJson(risposta);
-
-        return risposta;
+        return gson.toJson(hotelList);
     }
 
     public String allSorted(){
         List<Albergo> newHotelList = new ArrayList<>(hotelList);
         newHotelList.sort(Comparator.comparing(Albergo::getNome));
-
-        String risposta="{ hotels: [";
-        for (int i=0; i<newHotelList.size();i++) {
-            risposta += "id: " +newHotelList.get(i).getId() + ", ";
-            risposta += "Nome: " +newHotelList.get(i).getNome() + ", ";
-            risposta += "Prezzo_suite: " +newHotelList.get(i).getSuite_price() + ", ";
-            risposta += "Quantita_suite: " +newHotelList.get(i).getSuite() + "; ";
-        }
-        risposta+="]}";
-        risposta=gson.toJson(risposta);
-
-        return risposta;
+        return gson.toJson(newHotelList);
     }
 
     public String moreExpensiveSuite(){
@@ -67,16 +46,7 @@ public class GestoreAlberghi {
                 index=i;
             }
         }
-
-        String risposta="{ hotels: [";
-        risposta += "id: " +hotelList.get(index).getId() + ", ";
-        risposta += "Nome: " +hotelList.get(index).getNome() + ", ";
-        risposta += "Prezzo_suite: " +hotelList.get(index).getSuite_price() + ", ";
-        risposta += "Quantita_suite: " +hotelList.get(index).getSuite() + "; ";
-        risposta+="]}";
-        risposta=gson.toJson(risposta);
-
-        return risposta;
+        return gson.toJson(hotelList.get(index));
     }
 
     public String moreExpensiveHTML(){
@@ -125,7 +95,6 @@ public class GestoreAlberghi {
                     + newHotelList.get(i).getSuite_price() + "</td> <td>"
                     + newHotelList.get(i).getSuite() + "</td> </tr>";
         }
-
         risposta+=design.getBottomPart();
         return risposta;
     }
